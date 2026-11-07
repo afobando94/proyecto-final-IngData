@@ -19,7 +19,28 @@
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
-		"schema": []
+		"schema": [
+			{
+				"name": "pid",
+				"type": "String"
+			},
+			{
+				"name": "Floor",
+				"type": "String"
+			},
+			{
+				"name": "bedrooms",
+				"type": "String"
+			},
+			{
+				"name": "Full Bath",
+				"type": "String"
+			},
+			{
+				"name": "Half Bath",
+				"type": "String"
+			}
+		]
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
 }

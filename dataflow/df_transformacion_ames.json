@@ -17,12 +17,19 @@
 						"type": "DatasetReference"
 					},
 					"name": "srcAmesproperty"
+				},
+				{
+					"dataset": {
+						"referenceName": "cp_floordetail_raw",
+						"type": "DatasetReference"
+					},
+					"name": "srcFloorDetail"
 				}
 			],
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "SinkTemporal",
+						"referenceName": "DelimitedText1",
 						"type": "DatasetReference"
 					},
 					"name": "sink1"
@@ -31,6 +38,9 @@
 			"transformations": [
 				{
 					"name": "join1"
+				},
+				{
+					"name": "aggFloorDetail"
 				}
 			],
 			"scriptLines": [
@@ -95,12 +105,23 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> srcAmesproperty",
+				"source(output(",
+				"          pid as string,",
+				"          Floor as string,",
+				"          bedrooms as integer,",
+				"          {Full Bath} as integer,",
+				"          {Half Bath} as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> srcFloorDetail",
 				"srcAmesproperty, srcAmesdbtemp join(srcAmesproperty@PID == srcAmesdbtemp@pid,",
 				"     joinType:'inner',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
 				"     broadcast: 'auto')~> join1",
-				"join1 sink(allowSchemaDrift: true,",
+				"srcFloorDetail aggregate(total_registros = count()) ~> aggFloorDetail",
+				"aggFloorDetail sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> sink1"
