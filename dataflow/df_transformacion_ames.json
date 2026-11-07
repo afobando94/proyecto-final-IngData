@@ -1,0 +1,110 @@
+{
+	"name": "df_transformacion_ames",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "cp_amesdbtemp_raw",
+						"type": "DatasetReference"
+					},
+					"name": "srcAmesdbtemp"
+				},
+				{
+					"dataset": {
+						"referenceName": "csv_amesproperty",
+						"type": "DatasetReference"
+					},
+					"name": "srcAmesproperty"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "SinkTemporal",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "join1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          {Exter Cond} as short,",
+				"          {Exter Qual} as short,",
+				"          {Heating QC} as short,",
+				"          {Kitchen Qual} as short,",
+				"          {MS Zoning} as short,",
+				"          pid as string,",
+				"          {Roof Style} as string,",
+				"          {Roof Matl} as string,",
+				"          {Exterior 1st} as string,",
+				"          {Exterior 2nd} as string,",
+				"          {Mas Vnr Type} as string,",
+				"          {Mas Vnr Area} as short,",
+				"          foundation as string,",
+				"          heating as string,",
+				"          {Central Air} as boolean,",
+				"          electrical as string,",
+				"          {1st Flr SF} as short,",
+				"          {2nd Flr SF} as short,",
+				"          {Low Qual Fin SF} as short,",
+				"          {Kitchen AbvGr} as short,",
+				"          {TotRms AbvGrd} as short,",
+				"          functional as string,",
+				"          fireplaces as short,",
+				"          {Fireplace Qu} as string,",
+				"          {Paved Drive} as string,",
+				"          {Wood Deck SF} as short,",
+				"          {Open Porch SF} as short,",
+				"          {Enclosed Porch} as short,",
+				"          {3Ssn Porch} as short,",
+				"          {Screen Porch} as short,",
+				"          fence as string,",
+				"          {MS SubClass} as short",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> srcAmesdbtemp",
+				"source(output(",
+				"          PID as string,",
+				"          {Lot Frontage} as string,",
+				"          {Lot Area} as string,",
+				"          Street as string,",
+				"          Alley as string,",
+				"          {Lot Shape} as string,",
+				"          {Land Contour} as string,",
+				"          Utilities as string,",
+				"          {Lot Config} as string,",
+				"          {Land Slope} as string,",
+				"          Neighborhood as string,",
+				"          {Condition 1} as string,",
+				"          {Condition 2} as string,",
+				"          {Bldg Type} as string,",
+				"          {House Style} as string,",
+				"          {Overall Qual} as string,",
+				"          {Overall Cond} as string,",
+				"          {Year Built} as string,",
+				"          {Year Remod/Add} as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> srcAmesproperty",
+				"srcAmesproperty, srcAmesdbtemp join(srcAmesproperty@PID == srcAmesdbtemp@pid,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1",
+				"join1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
+			]
+		}
+	}
+}

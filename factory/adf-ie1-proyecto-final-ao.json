@@ -1,0 +1,15 @@
+{
+	"name": "adf-ie1-proyecto-final-ao",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "mexicocentral",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "a278cbb4-854e-4ea9-a558-40057c097a27",
+		"tenantId": "e994072b-523e-4bfe-86e2-442c5e10b244"
+	}
+}

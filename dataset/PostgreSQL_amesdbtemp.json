@@ -1,0 +1,17 @@
+{
+	"name": "PostgreSQL_amesdbtemp",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "PostgreSQL_ProyectoFinal",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzurePostgreSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "public",
+			"table": "amesdbtemp"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

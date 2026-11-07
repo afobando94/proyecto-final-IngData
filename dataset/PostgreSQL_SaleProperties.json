@@ -1,0 +1,17 @@
+{
+	"name": "PostgreSQL_SaleProperties",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "PostgreSQL_ProyectoFinal",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzurePostgreSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "public",
+			"table": "saleproperty"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
