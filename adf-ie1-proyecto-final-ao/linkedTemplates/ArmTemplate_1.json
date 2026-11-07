@@ -13,6 +13,33 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/cp_amesdbtemp_raw')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "amesdbtemp.csv",
+						"folderPath": "raw",
+						"container": "etl-data"
+					},
+					"columnDelimiter": ";",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/cp_bsmt_raw')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -62,7 +89,28 @@
 					"firstRowAsHeader": true,
 					"quoteChar": "\""
 				},
-				"schema": []
+				"schema": [
+					{
+						"name": "pid",
+						"type": "String"
+					},
+					{
+						"name": "Floor",
+						"type": "String"
+					},
+					{
+						"name": "bedrooms",
+						"type": "String"
+					},
+					{
+						"name": "Full Bath",
+						"type": "String"
+					},
+					{
+						"name": "Half Bath",
+						"type": "String"
+					}
+				]
 			},
 			"dependsOn": []
 		},
@@ -843,6 +891,7 @@
 				"lastPublishTime": "2026-11-07T02:42:25Z"
 			},
 			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/cp_amesdbtemp_raw')]",
 				"[concat(variables('factoryId'), '/datasets/cp_typequality_raw')]",
 				"[concat(variables('factoryId'), '/datasets/cp_saleproperties_raw')]",
 				"[concat(variables('factoryId'), '/datasets/cp_floordetail_raw')]"
@@ -869,12 +918,19 @@
 								"type": "DatasetReference"
 							},
 							"name": "srcAmesproperty"
+						},
+						{
+							"dataset": {
+								"referenceName": "cp_floordetail_raw",
+								"type": "DatasetReference"
+							},
+							"name": "srcFloorDetail"
 						}
 					],
 					"sinks": [
 						{
 							"dataset": {
-								"referenceName": "SinkTemporal",
+								"referenceName": "DelimitedText1",
 								"type": "DatasetReference"
 							},
 							"name": "sink1"
@@ -883,6 +939,9 @@
 					"transformations": [
 						{
 							"name": "join1"
+						},
+						{
+							"name": "aggFloorDetail"
 						}
 					],
 					"scriptLines": [
@@ -947,12 +1006,23 @@
 						"     allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     ignoreNoFilesFound: false) ~> srcAmesproperty",
+						"source(output(",
+						"          pid as string,",
+						"          Floor as string,",
+						"          bedrooms as integer,",
+						"          {Full Bath} as integer,",
+						"          {Half Bath} as integer",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> srcFloorDetail",
 						"srcAmesproperty, srcAmesdbtemp join(srcAmesproperty@PID == srcAmesdbtemp@pid,",
 						"     joinType:'inner',",
 						"     matchType:'exact',",
 						"     ignoreSpaces: false,",
 						"     broadcast: 'auto')~> join1",
-						"join1 sink(allowSchemaDrift: true,",
+						"srcFloorDetail aggregate(total_registros = count()) ~> aggFloorDetail",
+						"aggFloorDetail sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     skipDuplicateMapInputs: true,",
 						"     skipDuplicateMapOutputs: true) ~> sink1"
@@ -960,7 +1030,9 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/csv_amesproperty')]"
+				"[concat(variables('factoryId'), '/datasets/cp_amesdbtemp_raw')]",
+				"[concat(variables('factoryId'), '/datasets/csv_amesproperty')]",
+				"[concat(variables('factoryId'), '/datasets/cp_floordetail_raw')]"
 			]
 		}
 	]
