@@ -4,24 +4,24 @@
 	"parameters": {
 		"factoryName": {
 			"type": "string",
-			"metadata": "Data Factory name",
+			"metadata": "Nombre de instancia de Data Factory",
 			"defaultValue": "adf-ie1-proyecto-final-ao"
 		},
 		"AzureBlobStorage1_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
+			"metadata": "Cadena protegida para \"connectionString\"de \"AzureBlobStorage1\""
 		},
 		"AzurePostgreSql1_password": {
 			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'AzurePostgreSql1'"
+			"metadata": "Cadena protegida para \"password\"de \"AzurePostgreSql1\""
 		},
 		"MongoConn_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'MongoConn'"
+			"metadata": "Cadena protegida para \"connectionString\"de \"MongoConn\""
 		},
 		"PostgreSQL_ProyectoFinal_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'PostgreSQL_ProyectoFinal'"
+			"metadata": "Cadena protegida para \"connectionString\"de \"PostgreSQL_ProyectoFinal\""
 		},
 		"AzurePostgreSql1_properties_typeProperties_server": {
 			"type": "string",
@@ -1024,7 +1024,28 @@
 					"firstRowAsHeader": true,
 					"quoteChar": "\""
 				},
-				"schema": []
+				"schema": [
+					{
+						"name": "Bsmt Qual",
+						"type": "String"
+					},
+					{
+						"name": "Bsmt Cond",
+						"type": "String"
+					},
+					{
+						"name": "Bsmt Exposure",
+						"type": "String"
+					},
+					{
+						"name": "BsmtFin Type 1",
+						"type": "String"
+					},
+					{
+						"name": "BsmtFin Type 2",
+						"type": "String"
+					}
+				]
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
@@ -1103,7 +1124,24 @@
 					"firstRowAsHeader": true,
 					"quoteChar": "\""
 				},
-				"schema": []
+				"schema": [
+					{
+						"name": "Garage Type",
+						"type": "String"
+					},
+					{
+						"name": "Garage Finish",
+						"type": "String"
+					},
+					{
+						"name": "Garage Qual",
+						"type": "String"
+					},
+					{
+						"name": "Garage Cond",
+						"type": "String"
+					}
+				]
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
@@ -1132,7 +1170,12 @@
 					"firstRowAsHeader": true,
 					"quoteChar": "\""
 				},
-				"schema": []
+				"schema": [
+					{
+						"name": "Misc Feature",
+						"type": "String"
+					}
+				]
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
@@ -1161,7 +1204,12 @@
 					"firstRowAsHeader": true,
 					"quoteChar": "\""
 				},
-				"schema": []
+				"schema": [
+					{
+						"name": "Pool QC",
+						"type": "String"
+					}
+				]
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
@@ -1424,6 +1472,34 @@
 								"type": "DatasetReference"
 							},
 							"name": "srcFloorDetail"
+						},
+						{
+							"dataset": {
+								"referenceName": "cp_garage_raw",
+								"type": "DatasetReference"
+							},
+							"name": "srcGarage"
+						},
+						{
+							"dataset": {
+								"referenceName": "cp_bsmt_raw",
+								"type": "DatasetReference"
+							},
+							"name": "srcBsmt"
+						},
+						{
+							"dataset": {
+								"referenceName": "cp_pool_raw",
+								"type": "DatasetReference"
+							},
+							"name": "srcPool"
+						},
+						{
+							"dataset": {
+								"referenceName": "cp_misc_raw",
+								"type": "DatasetReference"
+							},
+							"name": "srcMisc"
 						}
 					],
 					"sinks": [
@@ -1521,6 +1597,37 @@
 						"     allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     ignoreNoFilesFound: false) ~> srcFloorDetail",
+						"source(output(",
+						"          {Garage Type} as string,",
+						"          {Garage Finish} as string,",
+						"          {Garage Qual} as string,",
+						"          {Garage Cond} as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> srcGarage",
+						"source(output(",
+						"          {Bsmt Qual} as string,",
+						"          {Bsmt Cond} as string,",
+						"          {Bsmt Exposure} as string,",
+						"          {BsmtFin Type 1} as string,",
+						"          {BsmtFin Type 2} as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> srcBsmt",
+						"source(output(",
+						"          {Pool QC} as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> srcPool",
+						"source(output(",
+						"          {Misc Feature} as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> srcMisc",
 						"srcAmesproperty, srcAmesdbtemp join(srcAmesproperty@PID == srcAmesdbtemp@pid,",
 						"     joinType:'inner',",
 						"     matchType:'exact',",
@@ -1547,6 +1654,10 @@
 				"[concat(variables('factoryId'), '/datasets/cp_amesdbtemp_raw')]",
 				"[concat(variables('factoryId'), '/datasets/csv_amesproperty')]",
 				"[concat(variables('factoryId'), '/datasets/cp_floordetail_raw')]",
+				"[concat(variables('factoryId'), '/datasets/cp_garage_raw')]",
+				"[concat(variables('factoryId'), '/datasets/cp_bsmt_raw')]",
+				"[concat(variables('factoryId'), '/datasets/cp_pool_raw')]",
+				"[concat(variables('factoryId'), '/datasets/cp_misc_raw')]",
 				"[concat(variables('factoryId'), '/datasets/DelimitedText1')]"
 			]
 		}
