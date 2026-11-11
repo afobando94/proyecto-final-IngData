@@ -942,6 +942,12 @@
 						},
 						{
 							"name": "aggFloorDetail"
+						},
+						{
+							"name": "join2"
+						},
+						{
+							"name": "derivedColumn1"
 						}
 					],
 					"scriptLines": [
@@ -1021,8 +1027,17 @@
 						"     matchType:'exact',",
 						"     ignoreSpaces: false,",
 						"     broadcast: 'auto')~> join1",
-						"srcFloorDetail aggregate(total_registros = count()) ~> aggFloorDetail",
-						"aggFloorDetail sink(allowSchemaDrift: true,",
+						"srcFloorDetail aggregate(groupBy(pid),",
+						"     total_bedrooms = sum(toInteger(bedrooms)),",
+						"          total_full_bath = sum(toInteger(byName('Full Bath'))),",
+						"          total_half_bath = sum(toInteger(byName('Half Bath')))) ~> aggFloorDetail",
+						"srcAmesdbtemp, aggFloorDetail join(srcAmesdbtemp@pid == aggFloorDetail@pid,",
+						"     joinType:'inner',",
+						"     matchType:'exact',",
+						"     ignoreSpaces: false,",
+						"     broadcast: 'auto')~> join2",
+						"join2 derive(Gr_liv_area = toInteger(byName('1st Flr SF')) + toInteger(byName('2nd Flr SF')) + toInteger(byName('Low Qual Fin SF'))) ~> derivedColumn1",
+						"derivedColumn1 sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     skipDuplicateMapInputs: true,",
 						"     skipDuplicateMapOutputs: true) ~> sink1"
