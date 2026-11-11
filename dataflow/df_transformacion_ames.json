@@ -24,6 +24,34 @@
 						"type": "DatasetReference"
 					},
 					"name": "srcFloorDetail"
+				},
+				{
+					"dataset": {
+						"referenceName": "cp_garage_raw",
+						"type": "DatasetReference"
+					},
+					"name": "srcGarage"
+				},
+				{
+					"dataset": {
+						"referenceName": "cp_bsmt_raw",
+						"type": "DatasetReference"
+					},
+					"name": "srcBsmt"
+				},
+				{
+					"dataset": {
+						"referenceName": "cp_pool_raw",
+						"type": "DatasetReference"
+					},
+					"name": "srcPool"
+				},
+				{
+					"dataset": {
+						"referenceName": "cp_misc_raw",
+						"type": "DatasetReference"
+					},
+					"name": "srcMisc"
 				}
 			],
 			"sinks": [
@@ -121,6 +149,37 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> srcFloorDetail",
+				"source(output(",
+				"          {Garage Type} as string,",
+				"          {Garage Finish} as string,",
+				"          {Garage Qual} as string,",
+				"          {Garage Cond} as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> srcGarage",
+				"source(output(",
+				"          {Bsmt Qual} as string,",
+				"          {Bsmt Cond} as string,",
+				"          {Bsmt Exposure} as string,",
+				"          {BsmtFin Type 1} as string,",
+				"          {BsmtFin Type 2} as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> srcBsmt",
+				"source(output(",
+				"          {Pool QC} as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> srcPool",
+				"source(output(",
+				"          {Misc Feature} as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> srcMisc",
 				"srcAmesproperty, srcAmesdbtemp join(srcAmesproperty@PID == srcAmesdbtemp@pid,",
 				"     joinType:'inner',",
 				"     matchType:'exact',",

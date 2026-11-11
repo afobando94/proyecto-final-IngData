@@ -19,7 +19,24 @@
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
-		"schema": []
+		"schema": [
+			{
+				"name": "Garage Type",
+				"type": "String"
+			},
+			{
+				"name": "Garage Finish",
+				"type": "String"
+			},
+			{
+				"name": "Garage Qual",
+				"type": "String"
+			},
+			{
+				"name": "Garage Cond",
+				"type": "String"
+			}
+		]
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
 }

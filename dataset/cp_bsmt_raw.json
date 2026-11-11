@@ -19,7 +19,28 @@
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
-		"schema": []
+		"schema": [
+			{
+				"name": "Bsmt Qual",
+				"type": "String"
+			},
+			{
+				"name": "Bsmt Cond",
+				"type": "String"
+			},
+			{
+				"name": "Bsmt Exposure",
+				"type": "String"
+			},
+			{
+				"name": "BsmtFin Type 1",
+				"type": "String"
+			},
+			{
+				"name": "BsmtFin Type 2",
+				"type": "String"
+			}
+		]
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
 }
