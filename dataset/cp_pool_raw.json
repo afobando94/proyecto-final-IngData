@@ -14,14 +14,13 @@
 				"folderPath": "raw",
 				"container": "etl-data"
 			},
-			"columnDelimiter": ",",
+			"columnDelimiter": "\"",
 			"escapeChar": "\\",
-			"firstRowAsHeader": true,
-			"quoteChar": "\""
+			"firstRowAsHeader": false,
+			"quoteChar": null
 		},
 		"schema": [
 			{
-				"name": "Pool QC",
 				"type": "String"
 			}
 		]

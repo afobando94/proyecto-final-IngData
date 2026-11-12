@@ -30,7 +30,84 @@
 							"fileExtension": ".txt"
 						}
 					},
-					"enableStaging": false
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['PID']['$numberLong']"
+								},
+								"sink": {
+									"name": "pid",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Garage Type']"
+								},
+								"sink": {
+									"name": "garage_type",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Garage Yr Blt']['$numberLong']"
+								},
+								"sink": {
+									"name": "garage_yr_blt",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Garage Finish']"
+								},
+								"sink": {
+									"name": "garage_finish",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Garage Cars']['$numberLong']"
+								},
+								"sink": {
+									"name": "garage_cars",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Garage Area']['$numberLong']"
+								},
+								"sink": {
+									"name": "garage_area",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Garage Qual']"
+								},
+								"sink": {
+									"name": "garage_qual",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Garage Cond']"
+								},
+								"sink": {
+									"name": "garage_cond",
+									"type": "String"
+								}
+							}
+						]
+					}
 				},
 				"inputs": [
 					{
@@ -73,7 +150,41 @@
 							"fileExtension": ".txt"
 						}
 					},
-					"enableStaging": false
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['PID']['$numberLong']"
+								},
+								"sink": {
+									"type": "String",
+									"ordinal": 1
+								}
+							},
+							{
+								"source": {
+									"path": "$['Pool Area']['$numberLong']"
+								},
+								"sink": {
+									"type": "Int32",
+									"ordinal": 2
+								}
+							},
+							{
+								"source": {
+									"path": "$['Pool QC']"
+								},
+								"sink": {
+									"type": "String",
+									"ordinal": 3
+								}
+							}
+						],
+						"collectionReference": "",
+						"mapComplexValuesToString": false
+					}
 				},
 				"inputs": [
 					{
@@ -116,7 +227,120 @@
 							"fileExtension": ".txt"
 						}
 					},
-					"enableStaging": false
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['PID']['$numberLong']"
+								},
+								"sink": {
+									"name": "pid",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Bsmt Qual']"
+								},
+								"sink": {
+									"name": "bsmt_qual",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Bsmt Cond']"
+								},
+								"sink": {
+									"name": "bsmt_cond",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Bsmt Exposure']"
+								},
+								"sink": {
+									"name": "bsmt_exposure",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['BsmtFin Type 1']"
+								},
+								"sink": {
+									"name": "bsmtfin_type_1",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['BsmtFin SF 1']['$numberLong']"
+								},
+								"sink": {
+									"name": "bsmtfin_sf_1",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['BsmtFin Type 2']"
+								},
+								"sink": {
+									"name": "bsmtfin_type_2",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['BsmtFin SF 2']['$numberLong']"
+								},
+								"sink": {
+									"name": "bsmtfin_sf_2",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Bsmt Unf SF']['$numberLong']"
+								},
+								"sink": {
+									"name": "bsmt_unf_sf",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Total Bsmt SF']['$numberLong']"
+								},
+								"sink": {
+									"name": "total_bsmt_sf",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Bsmt Full Bath']['$numberLong']"
+								},
+								"sink": {
+									"name": "bsmt_full_bath",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Bsmt Half Bath']['$numberLong']"
+								},
+								"sink": {
+									"name": "bsmt_half_bath",
+									"type": "Int32"
+								}
+							}
+						]
+					}
 				},
 				"inputs": [
 					{
@@ -159,7 +383,38 @@
 							"fileExtension": ".txt"
 						}
 					},
-					"enableStaging": false
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['PID']['$numberLong']"
+								},
+								"sink": {
+									"name": "pid"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Misc Feature']"
+								},
+								"sink": {
+									"name": "misc_feature",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Misc Val']['$numberLong']"
+								},
+								"sink": {
+									"name": "misc_val",
+									"type": "Int32"
+								}
+							}
+						]
+					}
 				},
 				"inputs": [
 					{
