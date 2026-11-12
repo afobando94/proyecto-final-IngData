@@ -4,24 +4,24 @@
 	"parameters": {
 		"factoryName": {
 			"type": "string",
-			"metadata": "Nombre de instancia de Data Factory",
+			"metadata": "Data Factory name",
 			"defaultValue": "adf-ie1-proyecto-final-ao"
 		},
 		"AzureBlobStorage1_connectionString": {
 			"type": "secureString",
-			"metadata": "Cadena protegida para \"connectionString\"de \"AzureBlobStorage1\""
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
 		},
 		"AzurePostgreSql1_password": {
 			"type": "secureString",
-			"metadata": "Cadena protegida para \"password\"de \"AzurePostgreSql1\""
+			"metadata": "Secure string for 'password' of 'AzurePostgreSql1'"
 		},
 		"MongoConn_connectionString": {
 			"type": "secureString",
-			"metadata": "Cadena protegida para \"connectionString\"de \"MongoConn\""
+			"metadata": "Secure string for 'connectionString' of 'MongoConn'"
 		},
 		"PostgreSQL_ProyectoFinal_connectionString": {
 			"type": "secureString",
-			"metadata": "Cadena protegida para \"connectionString\"de \"PostgreSQL_ProyectoFinal\""
+			"metadata": "Secure string for 'connectionString' of 'PostgreSQL_ProyectoFinal'"
 		},
 		"AzurePostgreSql1_properties_typeProperties_server": {
 			"type": "string",
@@ -41,11 +41,11 @@
 		},
 		"containerUri": {
 			"type": "string",
-			"metadata": "URI de la cuenta de almacenamiento que contiene las plantillas de ARM vinculadas."
+			"metadata": "URI to storage account containing linked ARM templates"
 		},
 		"containerSasToken": {
 			"type": "string",
-			"metadata": "Token de SAS para la cuenta de almacenamiento que contiene las plantillas de ARM vinculadas"
+			"metadata": "Sas token to storage account containing linked ARM templates"
 		}
 	},
 	"variables": {
