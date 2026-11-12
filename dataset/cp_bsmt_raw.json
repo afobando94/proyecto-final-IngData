@@ -21,23 +21,51 @@
 		},
 		"schema": [
 			{
-				"name": "Bsmt Qual",
+				"name": "pid",
 				"type": "String"
 			},
 			{
-				"name": "Bsmt Cond",
+				"name": "bsmt_qual",
 				"type": "String"
 			},
 			{
-				"name": "Bsmt Exposure",
+				"name": "bsmt_cond",
 				"type": "String"
 			},
 			{
-				"name": "BsmtFin Type 1",
+				"name": "bsmt_exposure",
 				"type": "String"
 			},
 			{
-				"name": "BsmtFin Type 2",
+				"name": "bsmtfin_type_1",
+				"type": "String"
+			},
+			{
+				"name": "bsmtfin_sf_1",
+				"type": "String"
+			},
+			{
+				"name": "bsmtfin_type_2",
+				"type": "String"
+			},
+			{
+				"name": "bsmtfin_sf_2",
+				"type": "String"
+			},
+			{
+				"name": "bsmt_unf_sf",
+				"type": "String"
+			},
+			{
+				"name": "total_bsmt_sf",
+				"type": "String"
+			},
+			{
+				"name": "bsmt_full_bath",
+				"type": "String"
+			},
+			{
+				"name": "bsmt_half_bath",
 				"type": "String"
 			}
 		]

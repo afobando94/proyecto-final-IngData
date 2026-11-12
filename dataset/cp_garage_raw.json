@@ -21,19 +21,35 @@
 		},
 		"schema": [
 			{
-				"name": "Garage Type",
+				"name": "pid",
 				"type": "String"
 			},
 			{
-				"name": "Garage Finish",
+				"name": "garage_type",
 				"type": "String"
 			},
 			{
-				"name": "Garage Qual",
+				"name": "garage_yr_blt",
 				"type": "String"
 			},
 			{
-				"name": "Garage Cond",
+				"name": "garage_finish",
+				"type": "String"
+			},
+			{
+				"name": "garage_cars",
+				"type": "String"
+			},
+			{
+				"name": "garage_area",
+				"type": "String"
+			},
+			{
+				"name": "garage_qual",
+				"type": "String"
+			},
+			{
+				"name": "garage_cond",
 				"type": "String"
 			}
 		]

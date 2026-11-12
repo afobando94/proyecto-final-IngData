@@ -21,7 +21,15 @@
 		},
 		"schema": [
 			{
-				"name": "Misc Feature",
+				"name": "pid",
+				"type": "String"
+			},
+			{
+				"name": "misc_feature",
+				"type": "String"
+			},
+			{
+				"name": "misc_val",
 				"type": "String"
 			}
 		]

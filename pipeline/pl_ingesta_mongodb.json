@@ -133,7 +133,16 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": [],
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "pool"
+					},
+					{
+						"name": "Destination",
+						"value": "etl-data/raw/pool.csv"
+					}
+				],
 				"typeProperties": {
 					"source": {
 						"type": "MongoDbAtlasSource",
@@ -159,8 +168,8 @@
 									"path": "$['PID']['$numberLong']"
 								},
 								"sink": {
-									"type": "String",
-									"ordinal": 1
+									"name": "pid",
+									"type": "String"
 								}
 							},
 							{
@@ -168,8 +177,8 @@
 									"path": "$['Pool Area']['$numberLong']"
 								},
 								"sink": {
-									"type": "Int32",
-									"ordinal": 2
+									"name": "pool_area",
+									"type": "Int32"
 								}
 							},
 							{
@@ -177,8 +186,8 @@
 									"path": "$['Pool QC']"
 								},
 								"sink": {
-									"type": "String",
-									"ordinal": 3
+									"name": "pool_qc",
+									"type": "String"
 								}
 							}
 						],

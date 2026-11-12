@@ -14,13 +14,22 @@
 				"folderPath": "raw",
 				"container": "etl-data"
 			},
-			"columnDelimiter": "\"",
+			"columnDelimiter": ";",
 			"escapeChar": "\\",
-			"firstRowAsHeader": false,
-			"quoteChar": null
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
 		},
 		"schema": [
 			{
+				"name": "pid",
+				"type": "String"
+			},
+			{
+				"name": "pool_area",
+				"type": "String"
+			},
+			{
+				"name": "pool_qc",
 				"type": "String"
 			}
 		]
